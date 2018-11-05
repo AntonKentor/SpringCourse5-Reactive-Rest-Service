@@ -42,4 +42,16 @@ public class CategoryController {
         return categoryRepository.save(category);
     }
 
+    @PatchMapping("{id}")
+    Mono<Category> patchCategory(@PathVariable String id, @RequestBody Category category) {
+
+        Category foundCategory = categoryRepository.findById(id).block();
+
+        if (foundCategory.getDescription() != category.getDescription()) {
+            foundCategory.setDescription(category.getDescription());
+            return categoryRepository.save(foundCategory);
+        }
+        return Mono.just(foundCategory);
+    }
+
 }
