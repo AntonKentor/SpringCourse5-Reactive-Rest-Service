@@ -37,26 +37,18 @@ public class Boostrap implements CommandLineRunner {
 
     private void loadCategoryData() {
 
-        Category category1 = new Category();
-        category1.setDescription("Description 1");
 
-        Category category2 = new Category();
-        category2.setDescription("Description 2");
+        Category category1 = Category.builder().description("Description 1").build();
+        Category category2 = Category.builder().description("Description 2").build();
 
         categoryRepository.saveAll(Arrays.asList(category1, category2)).blockLast();
-
         log.info("Loaded category data");
     }
 
     private void loadVendorData() {
 
-        Vendor vendor1 = new Vendor();
-        vendor1.setFirstName("Vendor 1");
-        vendor1.setLastName("lastname 1");
-
-        Vendor vendor2 = new Vendor();
-        vendor2.setFirstName("Vendor 2");
-        vendor2.setLastName("lastname 2");
+        Vendor vendor1 = Vendor.builder().firstName("Vendor 1").lastName("lastname 1").build();
+        Vendor vendor2 = Vendor.builder().firstName("Vendor 2").lastName("lastname 2").build();
 
         vendorRepository.saveAll(Arrays.asList(vendor1, vendor2)).blockLast();
 
