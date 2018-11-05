@@ -1,7 +1,6 @@
-package com.service.rest.reactive.spring5webfluxrest;
+package com.service.rest.reactive.spring5webfluxrest.controller;
 
 
-import com.service.rest.reactive.spring5webfluxrest.controller.CategoryController;
 import com.service.rest.reactive.spring5webfluxrest.domain.Category;
 import com.service.rest.reactive.spring5webfluxrest.repository.CategoryRepository;
 import org.junit.Before;
@@ -76,7 +75,7 @@ public class CategoryControllerTest {
     }
 
     @Test
-    public void testUpdate() {
+    public void testUpdateCategory() {
 
         BDDMockito.given(categoryRepository.save(any(Category.class)))
                 .willReturn(Mono.just(Category.builder().build()));
