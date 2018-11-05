@@ -37,21 +37,24 @@ public class Boostrap implements CommandLineRunner {
 
     private void loadCategoryData() {
 
-
-        Category category1 = Category.builder().description("Description 1").build();
-        Category category2 = Category.builder().description("Description 2").build();
-
-        categoryRepository.saveAll(Arrays.asList(category1, category2)).blockLast();
+        categoryRepository.saveAll(Arrays.asList(
+                Category.builder().description("Fruits").build(),
+                Category.builder().description("Nuts").build(),
+                Category.builder().description("Breads").build(),
+                Category.builder().description("Meats").build(),
+                Category.builder().description("Eggs").build()
+        )).blockLast();
         log.info("Loaded category data");
     }
 
     private void loadVendorData() {
 
-        Vendor vendor1 = Vendor.builder().firstName("Vendor 1").lastName("lastname 1").build();
-        Vendor vendor2 = Vendor.builder().firstName("Vendor 2").lastName("lastname 2").build();
-
-        vendorRepository.saveAll(Arrays.asList(vendor1, vendor2)).blockLast();
-
+        vendorRepository.saveAll(Arrays.asList(
+                Vendor.builder().firstName("Tom").lastName("Cruise").build(),
+                Vendor.builder().firstName("Hugh").lastName("Heffner").build(),
+                Vendor.builder().firstName("Michael").lastName("Bolton").build(),
+                Vendor.builder().firstName("Bradley").lastName("Cooper").build()
+        )).blockLast();
         log.info("Loaded vendor data");
     }
 }
