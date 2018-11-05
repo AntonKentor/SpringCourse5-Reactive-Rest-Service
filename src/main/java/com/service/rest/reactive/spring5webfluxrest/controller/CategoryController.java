@@ -4,11 +4,13 @@ import com.service.rest.reactive.spring5webfluxrest.domain.Category;
 import com.service.rest.reactive.spring5webfluxrest.repository.CategoryRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@RequestMapping(CategoryController.BASE_URL)
 public class CategoryController {
 
     public static final String BASE_URL = "/api/v1/categories/";
@@ -19,12 +21,12 @@ public class CategoryController {
 
     private final CategoryRepository categoryRepository;
 
-    @GetMapping(CategoryController.BASE_URL)
+    @GetMapping
     public Flux<Category> getCategories() {
         return categoryRepository.findAll();
     }
 
-    @GetMapping(CategoryController.BASE_URL+"{id}")
+    @GetMapping("{id}")
     public Mono<Category> getCategoryById(@PathVariable String id) {
         return categoryRepository.findById(id);
     }

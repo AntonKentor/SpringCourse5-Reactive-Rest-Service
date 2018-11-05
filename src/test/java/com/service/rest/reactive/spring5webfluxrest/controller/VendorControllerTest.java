@@ -48,7 +48,7 @@ public class VendorControllerTest {
 
         webTestClient
                 .get()
-                .uri(getBaseUrl()+"SomeString")
+                .uri(getBaseUrl() + "SomeString")
                 .exchange()
                 .expectBodyList(Vendor.class)
                 .hasSize(1);
