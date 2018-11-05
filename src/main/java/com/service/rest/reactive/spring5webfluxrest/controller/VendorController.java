@@ -47,6 +47,10 @@ public class VendorController {
 
         Vendor foundVendor = vendorRepository.findById(id).block();
 
+        /*
+        * This logic should be extracted to servicelayer
+        * */
+
         boolean firstNameChanged = false;
         boolean lastNameChanged = false;
 
