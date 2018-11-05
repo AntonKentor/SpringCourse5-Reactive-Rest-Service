@@ -1,6 +1,8 @@
 package com.service.rest.reactive.spring5webfluxrest.boostrap;
 
+import com.service.rest.reactive.spring5webfluxrest.domain.Category;
 import com.service.rest.reactive.spring5webfluxrest.domain.Vendor;
+import com.service.rest.reactive.spring5webfluxrest.repository.CategoryRepository;
 import com.service.rest.reactive.spring5webfluxrest.repository.VendorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -12,17 +14,38 @@ import java.util.Arrays;
 @Component
 public class Boostrap implements CommandLineRunner {
 
-
-    public Boostrap(VendorRepository vendorRepository) {
+    public Boostrap(CategoryRepository categoryRepository, VendorRepository vendorRepository) {
+        this.categoryRepository = categoryRepository;
         this.vendorRepository = vendorRepository;
     }
 
-    private VendorRepository vendorRepository;
+    private final CategoryRepository categoryRepository;
+    private final VendorRepository vendorRepository;
 
 
     @Override
     public void run(String... args) throws Exception {
-        loadVendorData();
+
+        if (categoryRepository.count().block() == 0) {
+            loadCategoryData();
+        }
+
+        if (vendorRepository.count().block() == 0) {
+            loadVendorData();
+        }
+    }
+
+    private void loadCategoryData() {
+
+        Category category1 = new Category();
+        category1.setDescription("Description 1");
+
+        Category category2 = new Category();
+        category2.setDescription("Description 2");
+
+        categoryRepository.saveAll(Arrays.asList(category1, category2)).blockLast();
+
+        log.info("Loaded category data");
     }
 
     private void loadVendorData() {
